@@ -13,8 +13,8 @@ h1{margin:0;font-size:26px}.sub{color:var(--sub);margin:2px 0 18px}
 .lv{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;cursor:pointer;color:var(--ink)}
 .lv[disabled]{opacity:.35;cursor:not-allowed}.lv b{display:block;font-size:18px}.lv small{color:var(--sub)}
 .lv.on{outline:2px solid var(--acc)}
-#stage{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative}
-#title{position:absolute;left:0;right:0;top:10px;text-align:center;font-weight:700;font-size:20px;pointer-events:none}
+#stage{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow-x:auto;overflow-y:hidden;position:relative}
+#title{position:sticky;left:0;top:10px;height:0;overflow:visible;padding-top:10px;text-align:center;font-weight:700;font-size:20px;pointer-events:none}
 svg{display:block;width:100%;height:auto}
 .row{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;align-items:center}
 button.big{padding:12px 20px;border:0;border-radius:12px;background:var(--acc);color:#fff;font-weight:700;font-size:16px;cursor:pointer}

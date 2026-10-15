@@ -14,6 +14,7 @@ const NAMES = ["도", "레", "미", "파", "솔", "라", "시"];
 const PX_PER_BEAT = 90, HEAD_X = 220, BOTTOM_LINE_Y = 190; // 미(E4)가 맨 아래 줄
 const TEST = new URLSearchParams(location.search).get("test"); // 1 = 정확히 부르는 가상 목소리, bad = 틀리게
 const $ = (id) => document.getElementById(id);
+const VW = innerWidth < 600 ? 560 : 1000; // 휴대폰에선 보이는 폭을 줄여 악보를 크게
 const svg = $("score"), NS = "http://www.w3.org/2000/svg";
 
 let level = 0, ctx, analyser, buf, running = false;
@@ -66,8 +67,9 @@ const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS
 const yOf = (step) => BOTTOM_LINE_Y - (step - 2) * 10;
 function drawStaff(song) {
   svg.innerHTML = "";
-  svg.setAttribute("viewBox", "0 0 1000 300");
-  for (let i = 0; i < 5; i++) el("line", { x1: 0, x2: 1000, y1: 110 + i * 20, y2: 110 + i * 20, stroke: "currentColor", "stroke-opacity": .35 });
+  svg.setAttribute("viewBox", `0 0 ${VW} 300`);
+  svg.style.width = "";
+  for (let i = 0; i < 5; i++) el("line", { x1: 0, x2: VW, y1: 110 + i * 20, y2: 110 + i * 20, stroke: "currentColor", "stroke-opacity": .35 });
   el("text", { x: 14, y: 196, "font-size": 104, fill: "currentColor", "font-family": "Apple Symbols, Segoe UI Symbol, Noto Music, serif" }).textContent = "𝄞";
   el("line", { id: "playhead", x1: HEAD_X, x2: HEAD_X, y1: 60, y2: 250, stroke: "#2f6fed", "stroke-width": 3, "stroke-opacity": .6 });
   const g = el("g", { id: "roll" });
@@ -184,8 +186,10 @@ const PASS = ["합격!", "초견 천재?", "음대 가자", "귀가 좋으시네
 // 끝나면 곡 전체를 한 화면에: 초록/빨강 판정과 내가 부른 음높이 선이 다 보이게(캡처용)
 function overview(song) {
   const width = 90 + song.beats * PX_PER_BEAT + 60;
-  svg.setAttribute("viewBox", `0 0 ${Math.max(1000, width)} 300`);
-  svg.querySelectorAll("line:not(#roll line)").forEach((l) => { if (l.id !== "playhead") l.setAttribute("x2", Math.max(1000, width)); });
+  const W = Math.max(VW, width);
+  svg.setAttribute("viewBox", `0 0 ${W} 300`);
+  svg.style.width = `${(W / VW) * 100}%`; // 넘치면 옆으로 밀어서 보기
+  svg.querySelectorAll("line:not(#roll line)").forEach((l) => { if (l.id !== "playhead") l.setAttribute("x2", W); });
   $("roll").setAttribute("transform", `translate(${90 - HEAD_X} 0)`);
   $("playhead").remove();
 }
