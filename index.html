@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>초견 노래방</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎤</text></svg>">
+<meta name="description" content="악보 보고 바로 불러보는 초견 노래 게임. 마이크로 음정 판정.">
+<style>
+:root{--bg:#f7f5ef;--card:#fff;--ink:#1f2430;--sub:#6b7280;--ok:#16a34a;--bad:#e11d48;--acc:#2f6fed;--line:#d8d4c8}
+@media (prefers-color-scheme:dark){:root{--bg:#14161b;--card:#1d2027;--ink:#eceef2;--sub:#9aa3b2;--line:#3a3f4b}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,"Apple SD Gothic Neo",sans-serif}
+main{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+h1{margin:0;font-size:26px}.sub{color:var(--sub);margin:2px 0 18px}
+.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.lv{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;cursor:pointer;color:var(--ink)}
+.lv[disabled]{opacity:.35;cursor:not-allowed}.lv b{display:block;font-size:18px}.lv small{color:var(--sub)}
+.lv.on{outline:2px solid var(--acc)}
+#stage{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative}
+#title{position:absolute;left:0;right:0;top:10px;text-align:center;font-weight:700;font-size:20px;pointer-events:none}
+svg{display:block;width:100%;height:auto}
+.row{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;align-items:center}
+button.big{padding:12px 20px;border:0;border-radius:12px;background:var(--acc);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+button.big:disabled{opacity:.5}
+#msg{font-size:15px;color:var(--sub)}
+#result{display:none;text-align:center;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:12px}
+#result h2{margin:4px 0;font-size:28px}#stars{font-size:30px;letter-spacing:4px}
+.foot{color:var(--sub);font-size:12px;margin-top:28px;text-align:center}.foot a{color:var(--sub)}
+</style></head>
+<body><main>
+<h1>초견 노래방 🎤</h1>
+<p class="sub">악보 보고 바로 불러보기. 마이크로 음정 판정함 (옥타브 상관없음)</p>
+<div class="levels" id="levels"></div>
+<div id="stage"><div id="title"></div><svg id="score" viewBox="0 0 1000 300"></svg></div>
+<div class="row"><button class="big" id="go">시작</button><span id="msg">레벨 고르고 시작. "도" 음 들려준 다음 4박 세고 시작해요</span></div>
+<div id="result"><div id="stars"></div><h2 id="verdict"></h2><div id="detail"></div><div class="row" style="justify-content:center"><button class="big" id="again">다시</button><button class="big" id="share">결과 복사</button></div></div>
+<p class="foot">마이크 소리는 내 브라우저에서만 분석하고 어디로도 안 보냄 · <a href="https://github.com/hesong0222-dev/sightsing">GitHub</a> · 만든 사람 <a href="https://x.com/ComAsNas">개발새발자</a></p>
+</main><script src="app.js"></script></body></html>
